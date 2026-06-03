@@ -119,6 +119,8 @@ class BlePeripheralPlugin : FlutterPlugin, BlePeripheralChannel, ActivityAware {
         timeout: Long?,
         manufacturerData: ManufacturerData?,
         addManufacturerDataInScanResponse: Boolean,
+        connectable: Boolean,
+        scanResData: ManufacturerData?,
         requireBonding: Boolean,
     ) {
         this.requireBonding = requireBonding
@@ -131,7 +133,7 @@ class BlePeripheralPlugin : FlutterPlugin, BlePeripheralChannel, ActivityAware {
             bluetoothManager?.adapter?.name = localName ?: Build.MODEL
             val advertiseSettings = AdvertiseSettings.Builder()
                 .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
-                .setConnectable(true)
+                .setConnectable(connectable)
                 .setTimeout(timeout?.toInt() ?: 0)
                 .setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
                 .build()
@@ -145,13 +147,15 @@ class BlePeripheralPlugin : FlutterPlugin, BlePeripheralChannel, ActivityAware {
                 .setIncludeDeviceName(localName != null)
 
             manufacturerData?.let {
+                advertiseDataBuilder.addManufacturerData(
+                    it.manufacturerId.toInt(),
+                    it.data
+                )
+            }
+
+            scanResData?.let {
                 if (addManufacturerDataInScanResponse) {
                     scanResponseBuilder.addManufacturerData(
-                        it.manufacturerId.toInt(),
-                        it.data
-                    )
-                } else {
-                    advertiseDataBuilder.addManufacturerData(
                         it.manufacturerId.toInt(),
                         it.data
                     )

@@ -312,7 +312,7 @@ interface BlePeripheralChannel {
   fun clearServices()
   fun getServices(): List<String>
   fun getSubscribedClients(): List<SubscribedClient>
-  fun startAdvertising(services: List<String>, localName: String?, timeout: Long?, manufacturerData: ManufacturerData?, addManufacturerDataInScanResponse: Boolean, requireBonding: Boolean)
+  fun startAdvertising(services: List<String>, localName: String?, timeout: Long?, manufacturerData: ManufacturerData?, addManufacturerDataInScanResponse: Boolean, connectable: Boolean, scanResData: ManufacturerData?, requireBonding: Boolean)
   fun updateCharacteristic(characteristicId: String, value: ByteArray, deviceId: String?)
 
   companion object {
@@ -502,10 +502,12 @@ interface BlePeripheralChannel {
             val timeoutArg = args[2].let { if (it is Int) it.toLong() else it as Long? }
             val manufacturerDataArg = args[3] as ManufacturerData?
             val addManufacturerDataInScanResponseArg = args[4] as Boolean
-            val requireBondingArg = args[5] as Boolean
+            val connectable = args[5] as Boolean
+            val scanResData = args[6] as ManufacturerData?
+            val requireBondingArg = args[7] as Boolean
             var wrapped: List<Any?>
             try {
-              api.startAdvertising(servicesArg, localNameArg, timeoutArg, manufacturerDataArg, addManufacturerDataInScanResponseArg, requireBondingArg)
+              api.startAdvertising(servicesArg, localNameArg, timeoutArg, manufacturerDataArg, addManufacturerDataInScanResponseArg, connectable, scanResData, requireBondingArg)
               wrapped = listOf<Any?>(null)
             } catch (exception: Throwable) {
               wrapped = wrapError(exception)

@@ -41,6 +41,8 @@ abstract class BlePeripheralInterface {
     int? timeout,
     ManufacturerData? manufacturerData,
     bool addManufacturerDataInScanResponse = false,
+    bool connectable = true,
+    ManufacturerData? scanResData,
     bool requireBonding = true,
   });
 

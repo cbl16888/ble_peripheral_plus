@@ -574,6 +574,8 @@ class BlePeripheralChannel {
       int? timeout,
       ManufacturerData? manufacturerData,
       bool addManufacturerDataInScanResponse,
+      bool connectable,
+      ManufacturerData? scanResData,
       bool requireBonding) async {
     const String __pigeon_channelName =
         'dev.flutter.pigeon.ble_peripheral_plus.BlePeripheralChannel.startAdvertising';
@@ -590,6 +592,8 @@ class BlePeripheralChannel {
       timeout,
       manufacturerData,
       addManufacturerDataInScanResponse,
+      connectable,
+      scanResData,
       requireBonding
     ]) as List<Object?>?;
     if (__pigeon_replyList == null) {

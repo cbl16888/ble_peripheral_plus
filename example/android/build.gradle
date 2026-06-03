@@ -1,7 +1,27 @@
 allprojects {
     repositories {
-        google()
-        mavenCentral()
+        maven { url 'https://repo1.maven.org/maven2' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'https://mvn.mob.com/android' }
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://repo.huaweicloud.com/repository/maven/' }
+        maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
+        maven { url 'https://mirrors.163.com/maven/repository/maven-public/' }
+        maven { url 'https://maven.oscs.oschina.net/content/groups/public/' }
+        maven {
+            credentials {
+                username '614a8ddd89e55adfe515dbeb'
+                password 'W98IH)5sWliD'
+            }
+            url 'https://packages.aliyun.com/maven/repository/2139563-release-ywxakF/'
+        }
     }
 }
 
