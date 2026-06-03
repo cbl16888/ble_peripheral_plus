@@ -303,7 +303,7 @@ protocol BlePeripheralChannel {
   func clearServices() throws
   func getServices() throws -> [String]
   func getSubscribedClients() throws -> [SubscribedClient]
-  func startAdvertising(services: [String], localName: String?, timeout: Int64?, manufacturerData: ManufacturerData?, addManufacturerDataInScanResponse: Bool, requireBonding: Bool) throws
+  func startAdvertising(services: [String], localName: String?, timeout: Int64?, manufacturerData: ManufacturerData?, addManufacturerDataInScanResponse: Bool, connectable: Bool, scanResData: ManufacturerData?, requireBonding: Bool) throws
   func updateCharacteristic(characteristicId: String, value: FlutterStandardTypedData, deviceId: String?) throws
 }
 
@@ -456,9 +456,11 @@ class BlePeripheralChannelSetup {
         let timeoutArg: Int64? = isNullish(args[2]) ? nil : (args[2] is Int64? ? args[2] as! Int64? : Int64(args[2] as! Int32))
         let manufacturerDataArg: ManufacturerData? = nilOrValue(args[3])
         let addManufacturerDataInScanResponseArg = args[4] as! Bool
-        let requireBondingArg = args[5] as! Bool
+        let connectable = args[5] as! Bool
+        let scanResData: ManufacturerData? = nilOrValue(args[6])
+        let requireBondingArg = args[7] as! Bool
         do {
-          try api.startAdvertising(services: servicesArg, localName: localNameArg, timeout: timeoutArg, manufacturerData: manufacturerDataArg, addManufacturerDataInScanResponse: addManufacturerDataInScanResponseArg, requireBonding: requireBondingArg)
+          try api.startAdvertising(services: servicesArg, localName: localNameArg, timeout: timeoutArg, manufacturerData: manufacturerDataArg, addManufacturerDataInScanResponse: addManufacturerDataInScanResponseArg, connectable: connectable, scanResData: scanResData requireBonding: requireBondingArg)
           reply(wrapResult(nil))
         } catch {
           reply(wrapError(error))
