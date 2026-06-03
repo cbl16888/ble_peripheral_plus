@@ -77,6 +77,8 @@ class BlePeripheral {
     int? timeout,
     ManufacturerData? manufacturerData,
     bool addManufacturerDataInScanResponse = false,
+    bool connectable = true,
+    ManufacturerData? scanResData,
     bool requireBonding = true,
   }) {
     final hasServices = services.isNotEmpty;
@@ -97,6 +99,8 @@ class BlePeripheral {
       timeout: timeout,
       manufacturerData: manufacturerData,
       addManufacturerDataInScanResponse: addManufacturerDataInScanResponse,
+      connectable: connectable,
+      scanResData: scanResData,
       requireBonding: requireBonding,
     );
   }
