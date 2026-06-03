@@ -460,7 +460,7 @@ class BlePeripheralChannelSetup {
         let scanResData: ManufacturerData? = nilOrValue(args[6])
         let requireBondingArg = args[7] as! Bool
         do {
-          try api.startAdvertising(services: servicesArg, localName: localNameArg, timeout: timeoutArg, manufacturerData: manufacturerDataArg, addManufacturerDataInScanResponse: addManufacturerDataInScanResponseArg, connectable: connectable, scanResData: scanResData requireBonding: requireBondingArg)
+          try api.startAdvertising(services: servicesArg, localName: localNameArg, timeout: timeoutArg, manufacturerData: manufacturerDataArg, addManufacturerDataInScanResponse: addManufacturerDataInScanResponseArg, connectable: connectable, scanResData: scanResData, requireBonding: requireBondingArg)
           reply(wrapResult(nil))
         } catch {
           reply(wrapError(error))
