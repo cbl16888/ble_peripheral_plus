@@ -544,7 +544,11 @@ class BlePeripheralPlugin : FlutterPlugin, BlePeripheralChannel, ActivityAware {
     }
 
     override fun onDetachedFromActivity() {
-        activity?.unregisterReceiver(broadcastReceiver)
+        try {
+            activity?.unregisterReceiver(broadcastReceiver)
+        } catch (e: IllegalArgumentException) {
+            Log.w(TAG, "broadcastReceiver already unregistered")
+        }
         activity = null
     }
 
